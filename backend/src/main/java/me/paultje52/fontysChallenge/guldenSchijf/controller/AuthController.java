@@ -49,7 +49,6 @@ public class AuthController {
     public AuthResponseDTO renewEndpoint(HttpServletRequest request) {
         String userId = request.getAttribute("userId").toString();
         String jwt = this.jwtService.generate();
-        String name = this.userService.getUserName(Integer.parseInt(userId));
-        return new AuthResponseDTO(true, jwt, name);
+        return new AuthResponseDTO(true, jwt);
     }
 }
