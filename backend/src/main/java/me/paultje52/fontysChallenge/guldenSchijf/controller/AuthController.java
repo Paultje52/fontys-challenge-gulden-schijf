@@ -1,7 +1,7 @@
 package me.paultje52.fontysChallenge.guldenSchijf.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
+
 import me.paultje52.fontysChallenge.guldenSchijf.model.DTO.auth.*;
 import me.paultje52.fontysChallenge.guldenSchijf.service.JwtService;
 import me.paultje52.fontysChallenge.guldenSchijf.service.UserService;
