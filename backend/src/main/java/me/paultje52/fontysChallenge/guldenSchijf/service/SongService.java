@@ -25,15 +25,7 @@ public class SongService {
         return songsList.toArray(new SongModel[0]);
     }
     public SongModel[] GetAllSongsFiltered(String title,String band,String manager,String supplier){
-//        title = "%" + title + "%";
-//        band = "%" + "band" + "%";
-//        manager = "%" + "manager" + "%";
-//        supplier = "%" + "supplier" + "%";
-        System.out.println(title);
-        System.out.println(band);
-        System.out.println(manager);
-        System.out.println(supplier);
-        Iterable<SongModel> songs = songRepository.getAllSongsByFilterd(title,band,manager,supplier);
+        Iterable<SongModel> songs = songRepository.getAllSongsByFilter(title,band,manager,supplier);
         ArrayList<SongModel> songsList = new ArrayList<>();
         songs.forEach(songsList::add);
         return songsList.toArray(new SongModel[0]);
