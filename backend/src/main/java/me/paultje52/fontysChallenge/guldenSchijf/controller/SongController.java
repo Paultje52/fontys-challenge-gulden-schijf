@@ -22,10 +22,13 @@ public class SongController {
     }
 
     @RequestMapping("/search")
-    public SongModel[] searchAllSongs(@RequestParam(required = false) String title,@RequestParam(required = false) String band,@RequestParam(required = false) String manager,@RequestParam(required = false) String supplier){
-
+    public SongModel[] searchAllSongs(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String band,
+            @RequestParam(required = false) String manager,
+            @RequestParam(required = false) String supplier
+    ){
         return songService.GetAllSongsFiltered(title,band,manager,supplier);
-
     }
 
     @RequestMapping("/{id}.mp3")
