@@ -14,8 +14,8 @@ CREATE TABLE `manager` (
   `id` int(11) NOT NULL,
   `hourlyRate` int(11) NOT NULL,
   `name` text NOT NULL,
-  `adressStreet` text NOT NULL,
-  `adressNumber` int(11) NOT NULL,
+  `addressStreet` text NOT NULL,
+  `addressNumber` int(11) NOT NULL,
   `addressZip` text NOT NULL,
   `addressCity` text NOT NULL,
   `addressCountry` text NOT NULL
