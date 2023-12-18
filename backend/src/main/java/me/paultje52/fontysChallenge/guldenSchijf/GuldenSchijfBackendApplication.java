@@ -1,6 +1,7 @@
 package me.paultje52.fontysChallenge.guldenSchijf;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RestController
 @PropertySource("classpath:application.properties")
 public class GuldenSchijfBackendApplication {
+    @Value("${cors.origin}")
+    private String corsOrigin;
 
     public static void main(String[] args) {
         SpringApplication.run(GuldenSchijfBackendApplication.class, args);
@@ -22,6 +25,8 @@ public class GuldenSchijfBackendApplication {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
+        String corsOrigin = this.corsOrigin;
+
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
@@ -29,7 +34,7 @@ public class GuldenSchijfBackendApplication {
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .exposedHeaders("*")
-                        .allowedOrigins("${cors.origin}")
+                        .allowedOrigins(corsOrigin)
                         .allowCredentials(true);
             }
         };
