@@ -32,10 +32,7 @@
     if (typeof window === "undefined") return;
     band = await fetchSongContributer<Band>("band", Number(bandId));
     songs = await songSearch({
-      title: null,
-      band: band.name,
-      manager: null,
-      supplier: null
+      band: band.name
     });
   })();
 </script>
