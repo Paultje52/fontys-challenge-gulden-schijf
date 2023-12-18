@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D'n Gulden Schijf</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <link href="/icon/favicon.ico" rel="icon" />
+    <link rel="apple-touch-icon" href="/icon/logo.png" />
+
+    <meta name="theme-color" content="#43a047" />
+
+    <style>
+      html,
+      body {
+        padding: 0;
+        max-width: 100vw;
+      }
+    </style>
+
+    <script>
+      const appHeight = () => {
+        const doc = document.documentElement;
+        doc.style.setProperty("--app-height", `${window.innerHeight - 1}px`);
+      };
+      window.addEventListener("resize", appHeight);
+      appHeight();
+    </script>
+
+    %sveltekit.head%
+  </head>
+  <body>
+    <div>%sveltekit.body%</div>
+  </body>
+</html>
