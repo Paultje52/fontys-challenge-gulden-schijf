@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "plugins": ["svelte3", "@typescript-eslint", "prettier"],
+  "ignorePatterns": ["*.cjs"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2019
+  },
+  "env": {
+    "browser": true,
+    "es2017": true,
+    "node": true
+  },
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": 0,
+    "prettier/prettier": 1,
+    "no-warning-comments": 1
+  }
+}

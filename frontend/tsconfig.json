@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+
+  "compilerOptions": {
+    "paths": {
+      "$lib": ["./src/lib"],
+      "$lib/*": ["./src/lib/*"]
+    },
+    "target": "ES2021",
+    "skipLibCheck": true,
+    "types": [],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"],
+  "exclude": ["node_modules/*"],
+  "extends": "./.svelte-kit/tsconfig.json"
+}

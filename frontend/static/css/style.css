@@ -1,0 +1,4 @@
+/* PicoCSS style overrides */
+button {
+  width: fit-content!important;
+}
