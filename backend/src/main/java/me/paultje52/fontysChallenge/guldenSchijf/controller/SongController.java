@@ -21,7 +21,7 @@ public class SongController {
         return songService.GetAllSongs();
     }
 
-    @RequestMapping("/search")
+    @GetMapping("/search")
     public SongModel[] searchAllSongs(
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String band,
@@ -31,7 +31,7 @@ public class SongController {
         return songService.GetAllSongsFiltered(title,band,manager,supplier);
     }
 
-    @RequestMapping("/{id}.mp3")
+    @GetMapping("/{id}.mp3")
     public ResponseEntity<InputStreamResource> songById(@PathVariable int id) throws IOException {
         return songService.Mp3(id);
     }
