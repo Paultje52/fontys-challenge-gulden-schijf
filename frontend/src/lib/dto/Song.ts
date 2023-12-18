@@ -4,7 +4,13 @@ export type Song = {
   songYear: string;
   songDuration: number;
   songFilePath: string;
-  songBandID: number;
+
+  songBandId: number;
+  songBandName: string;
+
   songManagerId: number;
+  songManagerName: string;
+
   songSupplierId: number;
+  songSupplierName: string;
 };
