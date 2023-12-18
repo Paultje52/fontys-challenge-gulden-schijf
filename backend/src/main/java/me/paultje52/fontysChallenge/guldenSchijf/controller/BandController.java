@@ -20,7 +20,6 @@ public class BandController {
     public BandModel getBandById(@PathVariable int id) {
         BandModel model = this.bandService.getBandById(id);
         if (model == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Band not found");
-
         return model;
     }
 }

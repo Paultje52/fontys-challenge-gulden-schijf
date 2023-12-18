@@ -1,9 +1,7 @@
 package me.paultje52.fontysChallenge.guldenSchijf.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import me.paultje52.fontysChallenge.guldenSchijf.model.ManagerModel;
 import me.paultje52.fontysChallenge.guldenSchijf.model.SupplierModel;
-import me.paultje52.fontysChallenge.guldenSchijf.service.ManagerService;
 import me.paultje52.fontysChallenge.guldenSchijf.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +17,7 @@ public class SupplierController {
     private SupplierService supplierService;
 
     @GetMapping("/{id}")
-    public SupplierModel getBandById(@PathVariable int id) {
+    public SupplierModel getSupplierById(@PathVariable int id) {
         SupplierModel model = this.supplierService.getSupplierById(id);
         if (model == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Supplier not found");
 
