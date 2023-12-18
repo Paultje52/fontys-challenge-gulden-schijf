@@ -28,28 +28,16 @@
   form {
     margin-bottom: 3rem;
   }
-
-  figure {
-    width: fit-content;
-    max-width: 94vw;
-    margin: 0 auto;
-  }
 </style>
 
 <script lang="ts">
-  import type { Band } from "$lib/dto/Band";
-  import type { Manager } from "$lib/dto/Manager";
+  import SongsTable from "$lib/SongsTable.svelte";
   import type { ParsedSong } from "$lib/dto/ParsedSong";
-  import type { Song } from "$lib/dto/Song";
-  import type { Supplier } from "$lib/dto/Supplier";
-  import fetchSearch from "./fetchSearch";
-  import fetchSongContributer from "./fetchSongContributer";
+  import songSearch from "$lib/songsSearch";
 
   let isLoading = false;
   let songs: ParsedSong[];
   let fetchTime: number;
-  let audioElements: Record<string, HTMLAudioElement> = {};
-  let isAudioPlaying: Record<string, boolean> = {};
 
   async function handleSubmit(event: SubmitEvent) {
     const start = Date.now();
@@ -61,46 +49,15 @@
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
 
-    const search = {
+    songs = await songSearch({
       title: formData.get("title") as string,
       band: formData.get("band") as string,
       manager: formData.get("manager") as string,
       supplier: formData.get("supplier") as string
-    };
-
-    const result = await fetchSearch(search);
-    songs = await Promise.all(result.map((result) => parseSong(result)));
+    });
 
     isLoading = false;
     fetchTime = Date.now() - start;
-  }
-
-  async function parseSong(song: Song): Promise<ParsedSong> {
-    const [band, supplier, manager] = await Promise.all([
-      fetchSongContributer<Band>("band", song.songBandID),
-      fetchSongContributer<Supplier>("supplier", song.songSupplierId),
-      fetchSongContributer<Manager>("manager", song.songManagerId)
-    ]);
-
-    return {
-      id: song.songId,
-      title: song.songTitle,
-      duration: song.songDuration,
-      mp3Path: song.songFilePath,
-      year: song.songYear,
-      band: {
-        id: band.bandId,
-        name: band.name
-      },
-      manager: {
-        id: manager.managerId,
-        name: manager.name
-      },
-      supplier: {
-        id: supplier.supplierId,
-        name: supplier.name
-      }
-    };
   }
 </script>
 
@@ -176,56 +133,5 @@
       Tijd nodig om te zoeken: <b>{fetchTime}ms</b>
     </p>
   </div>
-  <figure>
-    <table>
-      <thead>
-        <tr>
-          <th>Titel</th>
-          <th>Tijdsduur</th>
-          <th>MP3</th>
-          <th>Jaar van uitgifte</th>
-          <th>Band</th>
-          <th>Leverancier</th>
-          <th>Manager</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each songs as song}
-          <td>{song.title}</td>
-          <td>{song.duration}</td>
-          <td>
-            <audio
-              src="{song.mp3Path}.mp3?jwt={localStorage.getItem('jwt')}"
-              bind:this={audioElements[song.id]}
-            />
-            {#if isAudioPlaying[song.id]}
-              <button
-                on:click={() => {
-                  audioElements[song.id].pause();
-                  isAudioPlaying[song.id] = false;
-                }}
-              >
-                Pauzeer
-              </button>
-            {:else}
-              <button
-                on:click={() => {
-                  audioElements[song.id].play();
-                  isAudioPlaying[song.id] = true;
-                }}
-              >
-                Speel af
-              </button>
-            {/if}
-          </td>
-          <td>{song.year}</td>
-          <td><a href="/band/{song.band.id}">{song.band.name}</a></td>
-          <td>
-            <a href="/supplier/{song.supplier.id}">{song.supplier.name}</a>
-          </td>
-          <td><a href="/manager/{song.manager.id}">{song.manager.name}</a></td>
-        {/each}
-      </tbody>
-    </table>
-  </figure>
+  <SongsTable {songs} />
 {/if}
