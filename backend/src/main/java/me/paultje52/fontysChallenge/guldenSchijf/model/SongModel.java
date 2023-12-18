@@ -35,16 +35,14 @@ public class SongModel {
     private String songBandName;
 
     @Column(name = "managerId")
-    private int managerId;
+    private int songManagerId;
 
     @Column(name = "managerName")
     private String songManagerName;
 
     @Column(name = "supplierId")
-    private int supplierId;
+    private int songSupplierId;
 
     @Column(name = "supplierName")
     private String songSupplierName;
-
-
 }
