@@ -1,4 +1,4 @@
-import type { RenewJwt } from "$lib/dto/RenewResponse";
+import type { RenewJwt } from "$lib/dto/auth/RenewResponse";
 import decodeJwt from "./decodeJwt";
 import getApiUrl from "./getApiUrl";
 

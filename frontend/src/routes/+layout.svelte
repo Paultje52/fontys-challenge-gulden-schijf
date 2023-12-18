@@ -20,7 +20,7 @@
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
   import decodeJwt from "$lib/util/decodeJwt";
-    import renewJwt from "$lib/util/renewJwt";
+  import renewJwt from "$lib/util/renewJwt";
 
   let renewTimeout: NodeJS.Timeout;
 
@@ -36,8 +36,7 @@
 
     // Renew if the JWT is about to expire (1m)
     const nextRenewAt = decoded.exp * 1000 - 60 * 1000;
-    console.log(nextRenewAt - Date.now());
-    
+
     renewTimeout = setTimeout(async () => {
       const success = await renewJwt();
       if (!success) {

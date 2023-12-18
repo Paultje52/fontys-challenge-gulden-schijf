@@ -10,7 +10,7 @@
 
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import type { RegisterResponse } from "$lib/dto/RegisterResponse";
+  import type { RegisterResponse } from "$lib/dto/auth/RegisterResponse";
   import getApiUrl from "$lib/util/getApiUrl";
 
   let isLoading = false;

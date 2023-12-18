@@ -10,7 +10,7 @@
 
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import type { LoginResponse } from "$lib/dto/LoginResponse";
+  import type { LoginResponse } from "$lib/dto/auth/LoginResponse";
   import getApiUrl from "$lib/util/getApiUrl";
 
   let isLoading = false;
