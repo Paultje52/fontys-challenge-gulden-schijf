@@ -1,10 +1,7 @@
 package me.paultje52.fontysChallenge.guldenSchijf.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,19 +15,34 @@ public class SongModel {
     @Id
     @Column(name = "id")
     private int songId;
+
     @Column(name = "title")
     private String songTitle;
+
     @Column(name = "year")
     private Year songYear;
+
     @Column(name = "duration")
     private int songDuration;
+
     @Column(name = "filePath")
     private String songFilePath;
+
     @Column(name = "bandId")
-    private int songBandID;
+    private int songBandId;
+
+    @Column(name = "bandName")
+    private String songBandName;
+
     @Column(name = "managerId")
     private int songManagerId;
+
+    @Column(name = "managerName")
+    private String songManagerName;
+
     @Column(name = "supplierId")
     private int songSupplierId;
 
+    @Column(name = "supplierName")
+    private String songSupplierName;
 }

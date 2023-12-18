@@ -19,8 +19,8 @@
 
   export let songs: ParsedSong[];
 
-  let audioElements: Record<string, HTMLAudioElement> = {};
-  let isAudioPlaying: Record<string, boolean> = {};
+  let audioElement: HTMLAudioElement;
+  let audioPlaying: false | number = false;
 
   function handlePopup(event: Event) {
     event.preventDefault();
@@ -36,6 +36,8 @@
     });
   }
 </script>
+
+<audio bind:this={audioElement} autoplay />
 
 <figure>
   <table>
@@ -56,24 +58,25 @@
           <td>{song.title}</td>
           <td>{song.duration}</td>
           <td>
-            <audio
-              src="{song.mp3Path}.mp3?jwt={localStorage.getItem('jwt')}"
-              bind:this={audioElements[song.id]}
-            />
-            {#if isAudioPlaying[song.id]}
+            {#if audioPlaying === song.id}
               <button
                 on:click={() => {
-                  audioElements[song.id].pause();
-                  isAudioPlaying[song.id] = false;
+                  audioElement.pause();
+                  audioPlaying = false;
                 }}
+                class="secondary"
               >
                 Pauzeer
               </button>
             {:else}
               <button
                 on:click={() => {
-                  audioElements[song.id].play();
-                  isAudioPlaying[song.id] = true;
+                  audioElement.setAttribute("src", `${song.mp3Path}.mp3?jwt=${localStorage.getItem("jwt")}`);
+                  audioElement.onload = () => {
+                    console.log(1);
+                    audioElement.play();
+                  };
+                  audioPlaying = song.id;
                 }}
               >
                 Speel af
