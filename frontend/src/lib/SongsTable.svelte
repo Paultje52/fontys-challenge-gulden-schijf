@@ -4,14 +4,33 @@
     max-width: 94vw;
     margin: 0 auto;
   }
+  td {
+    white-space: nowrap;
+  }
 </style>
 
 <script lang="ts">
   import type { ParsedSong } from "./dto/ParsedSong";
+  import popup from "./util/popup";
+
   export let songs: ParsedSong[];
 
   let audioElements: Record<string, HTMLAudioElement> = {};
   let isAudioPlaying: Record<string, boolean> = {};
+
+  function handlePopup(event: Event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+
+    const link = event.target as HTMLAnchorElement;
+    const url = link.href;
+
+    popup(url, {
+      width: 800,
+      height: 1000
+    });
+  }
 </script>
 
 <figure>
@@ -57,11 +76,21 @@
           {/if}
         </td>
         <td>{song.year}</td>
-        <td><a href="/band/{song.band.id}">{song.band.name}</a></td>
         <td>
-          <a href="/supplier/{song.supplier.id}">{song.supplier.name}</a>
+          <a href="/band/{song.band.id}" on:click={handlePopup}>
+            {song.band.name}
+          </a>
         </td>
-        <td><a href="/manager/{song.manager.id}">{song.manager.name}</a></td>
+        <td>
+          <a href="/supplier/{song.supplier.id}" on:click={handlePopup}>
+            {song.supplier.name}
+          </a>
+        </td>
+        <td>
+          <a href="/manager/{song.manager.id}" on:click={handlePopup}>
+            {song.manager.name}
+          </a>
+        </td>
       {/each}
     </tbody>
   </table>

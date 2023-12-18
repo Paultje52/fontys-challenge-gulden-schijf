@@ -12,6 +12,10 @@
       --font-size: 1.1rem;
     }
   }
+
+  .slot {
+    overflow-x: hidden;
+  }
 </style>
 
 <script lang="ts">
@@ -52,4 +56,6 @@
 </script>
 
 <!-- The place for the rest of the content -->
-<slot />
+<div class="slot">
+  <slot />
+</div>

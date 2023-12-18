@@ -1,6 +1,6 @@
 <style>
   .container {
-    margin-top: 1rem;
+    margin: 1rem;
   }
   .loader {
     display: flex;
@@ -18,7 +18,7 @@
 
 <script lang="ts">
   import { page } from "$app/stores";
-    import SongsTable from "$lib/SongsTable.svelte";
+  import SongsTable from "$lib/SongsTable.svelte";
   import type { Band } from "$lib/dto/Band";
   import type { ParsedSong } from "$lib/dto/ParsedSong";
   import fetchSongContributer from "$lib/fetchSongContributer";
@@ -38,8 +38,6 @@
       supplier: null
     });
   })();
-
-  $: console.log(band);
 </script>
 
 {#if band === undefined}
@@ -64,13 +62,11 @@
       <center>
         <p><i>Liedjes laden...</i></p>
       </center>
+    {:else if songs.length === 0}
+      <p>Deze artiest heeft nog <b class="error">geen</b> liedjes.</p>
     {:else}
-      {#if songs.length === 0}
-        <p>Deze artiest heeft nog <b class="error">geen</b> liedjes.</p>
-      {:else}
-        <p>Aantal liedjes: <b>{songs.length}</b></p>
-        <SongsTable {songs} />
-      {/if}
+      <p>Aantal liedjes: <b>{songs.length}</b></p>
+      <SongsTable {songs} />
     {/if}
   </div>
 {/if}
