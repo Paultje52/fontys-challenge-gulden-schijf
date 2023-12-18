@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "vite dev",
-    "build": "node scripts/build.js",
+    "build": "vite build",
     "start": "node build/index.js",
     "format": "prettier --check --plugin=prettier-plugin-svelte .",
     "format:fix": "prettier --write --plugin=prettier-plugin-svelte .",
@@ -35,6 +35,5 @@
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
