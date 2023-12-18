@@ -7,6 +7,10 @@
   td {
     white-space: nowrap;
   }
+  button {
+    margin-bottom: 0;
+    padding: 0.2rem 0.5rem;
+  }
 </style>
 
 <script lang="ts">
