@@ -50,7 +50,7 @@ public class AuthController {
     @PostMapping("/renew")
     public AuthResponseDTO renewEndpoint(HttpServletRequest request) {
         String userId = request.getAttribute("userId").toString();
-        String jwt = this.jwtService.generate();
+        String jwt = this.jwtService.generate(userId);
         String name = this.userService.getUserName(Integer.parseInt(userId));
         return new AuthResponseDTO(true, jwt, name);
     }

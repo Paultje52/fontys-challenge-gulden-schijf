@@ -20,9 +20,10 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generate() {
+    public String generate(String userId) {
         JwtBuilder jwt = Jwts.builder();
         jwt.expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60));
+        jwt.claim("userId", userId);
         return jwt.signWith(this.getSigningKey()).compact();
     }
 
@@ -35,6 +36,17 @@ public class JwtService {
             return expiration.after(new Date());
         } catch (JwtException e) {
             return false;
+        }
+    }
+
+    public String getUserId(String jwt) {
+        if (jwt == null || jwt.isEmpty()) return null;
+
+        JwtParser builder = Jwts.parser().verifyWith((SecretKey) this.getSigningKey()).build();
+        try {
+            return builder.parseSignedClaims(jwt).getPayload().get("userId").toString();
+        } catch (JwtException e) {
+            return null;
         }
     }
 }

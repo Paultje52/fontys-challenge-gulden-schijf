@@ -40,7 +40,9 @@ public class UserService {
         boolean matches = encoder().matches(data.getPassword(), user.get().getPassword());
         if (!matches) return null;
 
-        String jwt = jwtService.generate();
+        String jwt = jwtService.generate(
+                Integer.toString(user.get().getId())
+        );
 
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setJwt(jwt);

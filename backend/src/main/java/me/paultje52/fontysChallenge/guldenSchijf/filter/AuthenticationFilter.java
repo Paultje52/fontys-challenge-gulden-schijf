@@ -34,6 +34,9 @@ public class AuthenticationFilter implements Filter {
                 res.getWriter().flush();
                 return;
             }
+
+            String userId = this.jwtService.getUserId(jwt);
+            req.setAttribute("userId", userId);
         }
 
         chain.doFilter(request, response);
