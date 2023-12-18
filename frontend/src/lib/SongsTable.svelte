@@ -52,49 +52,51 @@
     </thead>
     <tbody>
       {#each songs as song}
-        <td>{song.title}</td>
-        <td>{song.duration}</td>
-        <td>
-          <audio
-            src="{song.mp3Path}.mp3?jwt={localStorage.getItem('jwt')}"
-            bind:this={audioElements[song.id]}
-          />
-          {#if isAudioPlaying[song.id]}
-            <button
-              on:click={() => {
-                audioElements[song.id].pause();
-                isAudioPlaying[song.id] = false;
-              }}
-            >
-              Pauzeer
-            </button>
-          {:else}
-            <button
-              on:click={() => {
-                audioElements[song.id].play();
-                isAudioPlaying[song.id] = true;
-              }}
-            >
-              Speel af
-            </button>
-          {/if}
-        </td>
-        <td>{song.year}</td>
-        <td>
-          <a href="/band/{song.band.id}" on:click={handlePopup}>
-            {song.band.name}
-          </a>
-        </td>
-        <td>
-          <a href="/supplier/{song.supplier.id}" on:click={handlePopup}>
-            {song.supplier.name}
-          </a>
-        </td>
-        <td>
-          <a href="/manager/{song.manager.id}" on:click={handlePopup}>
-            {song.manager.name}
-          </a>
-        </td>
+        <tr>
+          <td>{song.title}</td>
+          <td>{song.duration}</td>
+          <td>
+            <audio
+              src="{song.mp3Path}.mp3?jwt={localStorage.getItem('jwt')}"
+              bind:this={audioElements[song.id]}
+            />
+            {#if isAudioPlaying[song.id]}
+              <button
+                on:click={() => {
+                  audioElements[song.id].pause();
+                  isAudioPlaying[song.id] = false;
+                }}
+              >
+                Pauzeer
+              </button>
+            {:else}
+              <button
+                on:click={() => {
+                  audioElements[song.id].play();
+                  isAudioPlaying[song.id] = true;
+                }}
+              >
+                Speel af
+              </button>
+            {/if}
+          </td>
+          <td>{song.year}</td>
+          <td>
+            <a href="/band/{song.band.id}" on:click={handlePopup}>
+              {song.band.name}
+            </a>
+          </td>
+          <td>
+            <a href="/supplier/{song.supplier.id}" on:click={handlePopup}>
+              {song.supplier.name}
+            </a>
+          </td>
+          <td>
+            <a href="/manager/{song.manager.id}" on:click={handlePopup}>
+              {song.manager.name}
+            </a>
+          </td>
+        </tr>
       {/each}
     </tbody>
   </table>

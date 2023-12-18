@@ -30,7 +30,10 @@
 
   $: (async () => {
     if (typeof window === "undefined") return;
-    supplier = await fetchSongContributer<Supplier>("supplier", Number(supplierId));
+    supplier = await fetchSongContributer<Supplier>(
+      "supplier",
+      Number(supplierId)
+    );
     songs = await songSearch({
       supplier: supplier.name
     });
